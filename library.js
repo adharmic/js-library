@@ -1,6 +1,6 @@
 const myLibrary = [];
 
-const libElem = document.querySelector("#book-cards");
+const libElem = document.querySelector(".table-body");
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -39,69 +39,90 @@ function renderLibrary() {
     let index = 0;
     myLibrary.forEach((book) => {
         // Create header and p tags for book information
-        let card = document.createElement("div");
-        card.className = "book-card";
-        card.dataset.index = index;
+        let entry = document.createElement("tr");
+        // entry.className = "book-card";
+        entry.dataset.index = index;
 
-        // Add card header
-        let header = document.createElement("div");
-        header.className = "card-header";
-        let bookTitle = document.createElement("h1");
-        bookTitle.textContent = book.title.toUpperCase();
-        let authorName = document.createElement("h2");
-        authorName.textContent = book.author;
-        
-        header.appendChild(bookTitle);
-        header.appendChild(authorName);
-        card.appendChild(header);
+        let titleCol = document.createElement("td");
+        titleCol.textContent = book.title;
+        entry.appendChild(titleCol);
 
-        // Add card info
-        let bookInfo = document.createElement("div");
-        bookInfo.className = "card-body";
-        let numPages = document.createElement("p");
-        numPages.textContent = book.pages + " pages";
+        let authorCol = document.createElement("td");
+        authorCol.textContent = book.author;
+        entry.appendChild(authorCol);
 
-        bookInfo.appendChild(numPages);
-        card.appendChild(bookInfo);
+        let pageCol = document.createElement("td");
+        pageCol.textContent = book.pages;
+        entry.appendChild(pageCol);
 
         // Add "read" status checkbox
-        let readDiv = document.createElement("div");
-        let readLabel = document.createElement("label");
-        let readBox = document.createElement("input");
-        
-        readDiv.className = "read-div";
-        readLabel.className = "slider";
-        readBox.id = "read-box-" + index;
-        readLabel.htmlFor = readBox.id;
-        readBox.type = "checkbox";
-        readBox.checked = book.read;
-        readLabel.textContent = "Read?";
+        let readCol = document.createElement("td");
+        readCol.className = "td-read";
+        if (book.read) {
+            readCol.textContent = "Read";
+        }
+        else {
+            readCol.textContent = "Unread";
+        }
 
-        readBox.addEventListener("change", function(e) {
-            myLibrary[e.target.parentElement.parentElement.parentElement.getAttribute("data-index")].read = e.target.checked;
-        });
+        entry.appendChild(readCol);
 
-        readDiv.appendChild(readLabel);
-        readDiv.appendChild(readBox);
-        bookInfo.appendChild(readDiv);
-
+        let actions = document.createElement("td");
+        actions.className = "action-buttons";
         
         let delSelf = document.createElement("button");
-        delSelf.textContent = "Delete Book";
+        delSelf.className = "action-button";
+        
+        delSelf.dataset.index = index;
+
+        let trashIcon = document.createElement("i");
+        trashIcon.className = "fa fa-trash-o";
+        delSelf.appendChild(trashIcon);
         delSelf.addEventListener("click", function(e) {
-            removeBookFromLibrary(e.target.parentElement.getAttribute("data-index"));
+            removeBookFromLibrary(this.getAttribute("data-index"));
         });
 
-        card.appendChild(delSelf);
+        let toggleStatus = document.createElement("button");
+        toggleStatus.className = "action-button";
+        
+        toggleStatus.dataset.index = index;
+        toggleStatus.addEventListener("click", function(e) {
+            var currBook = myLibrary[this.getAttribute("data-index")];
+            currBook.read = !currBook.read;
+            renderLibrary();
+        });
 
-        cardElems.push(card);
+        let eyeIcon = document.createElement("i");
+        if (book.read) {
+            eyeIcon.className = "fa fa-eye-slash";
+        }
+        else {
+            eyeIcon.className = "fa fa-eye";
+        }
+        toggleStatus.appendChild(eyeIcon);
+
+        actions.appendChild(toggleStatus);
+        actions.appendChild(delSelf);
+        entry.appendChild(actions);
+
+        cardElems.push(entry);
         index++;
     })
+    if (index == 0) {
+        let empty = document.createElement("tr");
+        empty.className = "blank-row";
+        
+        let blankVals = document.createElement("td");
+        blankVals.colSpan = "5";
+
+        empty.appendChild(blankVals);
+        cardElems.push(empty);
+    }
 
     libElem.replaceChildren(...cardElems);
 }
 
-const newBookForm = document.querySelector(".new-book-form");
+const newBookForm = document.querySelector(".modal");
 function showForm() {
     newBookForm.classList.remove("hidden");
 }

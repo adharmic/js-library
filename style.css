@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    margin: 0;
+    margin: 10px;
     padding: 0;
 }
 
@@ -16,8 +16,35 @@ p {
     display: none !important;
 }
 
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
 .new-book-form {
-    padding: 20px;
+    z-index: 2;
+    padding: 0;
     border-radius: 15px;
     position: fixed;
     left: 50%;
@@ -26,24 +53,56 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: blanchedalmond;
+    background-color: white;
+    font-family: sans-serif;
+}
+
+.form-header {
+    font-weight: bold;
+    border-radius: 15px 15px 0 0;
+    margin: 0;
+    padding: 2% 5%;
+    text-align: center;
+    width: 90%;
+    height: 100%;
+    background-color: #009879;
+    color: white;
 }
 
 ul {
     margin: 10px 0;
-    padding: 0;
-    width: 100%;
+    padding: 2% 5%;
+    width: 90%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
+
 ul li {
+    margin: 2px 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
+
 .header {
     width: 100%;
-    background-color: blanchedalmond;
+    background-color: #00b18d;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: sans-serif;
+    border-radius: 15px 15px 0 0;
+    padding: 10px 0;
+}
+
+.header h1 {
+    padding-left: 10px;
+}
+
+.header button {
+    margin-right: 10px;
 }
 
 .main-content {
@@ -51,22 +110,120 @@ ul li {
     flex-direction: column;
 }
 
-#book-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    height: 200px;
+.book-table {
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.15);
 }
 
-.book-card {
+.book-table thead tr {
+    background-color: #009879;
+    color: white;
+    text-align: left;
+}
+
+.book-table th,
+.book-table td {
+    padding: 12px 15px;
+}
+
+.book-table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.book-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.book-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.td-read {
+    min-width: 100px;
+}
+
+.action-buttons {
     display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    border-radius: 15px;
-    text-align: center;
+    gap: 5px;
 }
 
-.card-header {
-    border-bottom: 1px solid black;
+.action-button {
+    text-align: center;
+    border: none;
+    color: white;
+    background-color: #009879;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-button:hover {
+    background-color: #00755e;
+    cursor: pointer;
+}
+
+.blank-row {
+    height: 10px;
+    background-color: white;
+}
+
+tfoot tr th {
+    background-color: #009879;
+    color: white;
+    border-radius: 0 0 15px 15px;
+}
+
+tfoot {
+    border-radius: 0 0 15px 15px;
+}
+
+tfoot tr {
+    border-radius: 0 0 15px 15px;
+}
+
+table {
+
+    border-radius: 0 0 15px 15px;
+}
+
+#show-form {
+    border: none;
+    border-radius: 5px;
+    line-height: 30px;
+    font-weight: bold;
+    color: white;
+    background-color: #00b18d;
+    margin-right: 15px;
+}
+
+#show-form:hover {
+    cursor: pointer;
+    background-color: #009879;
+}
+
+#show-form i {
+    margin-right: 5px;
+}
+
+.form-button {
+    border: none;
+    border-radius: 5px;
+    line-height: 30px;
+    font-weight: bold;
+    color: white;
+    background-color: #009879;
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+.form-button:hover {
+    cursor: pointer;
+    background-color: #00b18d;
 }
