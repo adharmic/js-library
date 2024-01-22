@@ -157,7 +157,7 @@ newBookForm.addEventListener("submit", (e) => {
     hideForm();
 });
 
-addBookToLibrary("20000 leagues under teh sesa", "Jules Verne", "300", true);
-addBookToLibrary("alpha", "Jules Verne", "300", true);
-addBookToLibrary("beta leagues", "Jules Verne", "300", true);
-addBookToLibrary("charlie leagues", "Jules Verne", "300", true);
+addBookToLibrary("20,000 Leagues Under the Sea", "Jules Verne", "20000", true);
+addBookToLibrary("Fahrenheit 451", "Ray Bradbury", "451", true);
+addBookToLibrary("Catch-22", "Joseph Heller", "22", true);
+addBookToLibrary("Animal Farm", "George Orwell", "300", true);
