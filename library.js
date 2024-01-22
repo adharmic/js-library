@@ -47,7 +47,7 @@ function renderLibrary() {
         let header = document.createElement("div");
         header.className = "card-header";
         let bookTitle = document.createElement("h1");
-        bookTitle.textContent = book.title;
+        bookTitle.textContent = book.title.toUpperCase();
         let authorName = document.createElement("h2");
         authorName.textContent = book.author;
         
@@ -79,7 +79,6 @@ function renderLibrary() {
 
         readBox.addEventListener("change", function(e) {
             myLibrary[e.target.parentElement.parentElement.parentElement.getAttribute("data-index")].read = e.target.checked;
-            console.dir(myLibrary);
         });
 
         readDiv.appendChild(readLabel);
@@ -101,6 +100,41 @@ function renderLibrary() {
 
     libElem.replaceChildren(...cardElems);
 }
+
+const newBookForm = document.querySelector(".new-book-form");
+function showForm() {
+    newBookForm.classList.remove("hidden");
+}
+
+function hideForm() {
+    newBookForm.classList.add("hidden");
+}
+
+newBookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let bookTitle = document.querySelector("#book-title");
+    let bookAuthor = document.querySelector("#book-author");
+    let numPages = document.querySelector("#book-pages");
+    let bookRead = document.querySelector("#book-status");
+
+    if (!bookTitle.value) {
+        bookTitle.value = "Untitled";
+    }
+    if (!bookAuthor.value) {
+        bookAuthor.value = "Anonymous";
+    }
+    if (!numPages.value || (!isNaN(numPages.value) && !isNaN(parseFloat(numPages.value))) || Number(numPages.value) < 0) {
+        numPages.value = "0";
+    }
+    
+    addBookToLibrary(bookTitle.value, bookAuthor.value, numPages.value, bookRead.checked);
+
+    bookTitle.value = "";
+    bookAuthor.value = "";
+    numPages.value = "";
+    bookRead.checked = false;
+    hideForm();
+});
 
 addBookToLibrary("20000 leagues under teh sesa", "Jules Verne", "300", true);
 addBookToLibrary("alpha", "Jules Verne", "300", true);

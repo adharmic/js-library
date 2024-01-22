@@ -12,9 +12,43 @@ p {
     padding: 0;
 }
 
+.hidden {
+    display: none !important;
+}
+
+.new-book-form {
+    padding: 20px;
+    border-radius: 15px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: blanchedalmond;
+}
+
+ul {
+    margin: 10px 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+ul li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
 .header {
     width: 100%;
     background-color: blanchedalmond;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
 }
 
 #book-cards {
@@ -22,6 +56,7 @@ p {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
+    height: 200px;
 }
 
 .book-card {

@@ -10,11 +10,44 @@
 </head>
 
 <body>
+    <div class="new-book-form hidden">
+        <div class="form-header">
+            Add New Book
+        </div>
+        <form id="new-book" class="form-page">
+            <ul>
+                <li>
+                    <label for="book-title">Book Title:</label>
+                    <input type="text" name="book-title" id="book-title">
+                </li>
+                <li>
+                    <label for="book-author">Author:</label>
+                    <input type="text" name="book-author" id="book-author">
+                </li>
+                <li>
+                    <label for="book-pages">Number of Pages:</label>
+                    <input type="text" name="book-pages" id="book-pages">
+                </li>
+                <li>
+                    <label for="book-status">Finished Reading:</label>
+                    <input type="checkbox" name="book-status" id="book-status">
+                </li>
+            </ul>
+        </form>
+        <div class="form-buttons">
+            <button type="submit" form="new-book">
+                Add Book
+            </button>
+            <button onclick="hideForm()">
+                Cancel
+            </button>
+        </div>
+    </div>
     <div class="header">
         <h1>Library</h1>
     </div>
     <div class="main-content">
-        <button>New Book</button>
+        <button onclick="showForm()">New Book</button>
         <div id="book-cards"></div>
     </div>
 
