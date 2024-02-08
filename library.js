@@ -2,25 +2,27 @@ const myLibrary = [];
 
 const libElem = document.querySelector(".table-body");
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
 
-    this.info = () => {
-        let readStatus = "";
-        if (this.read) {
-            readStatus = ", read.";
-        }
-        else {
-            readStatus = ", not read yet."
-        }
-        return this.title + " by " + this.author + ", " + pages + readStatus;
-    }
+        this.info = () => {
+            let readStatus = "";
+            if (this.read) {
+                readStatus = ", read.";
+            }
+            else {
+                readStatus = ", not read yet.";
+            }
+            return this.title + " by " + this.author + ", " + pages + readStatus;
+        };
 
-    this.toggleRead = () => {
-        this.read = !this.read;
+        this.toggleRead = () => {
+            this.read = !this.read;
+        };
     }
 }
 
